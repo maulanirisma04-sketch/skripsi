@@ -1,36 +1,71 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html>
+<head>
+    <title>Sistem Bidan</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- AdminLTE CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+<body class="hold-transition sidebar-mini layout-fixed">
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+<div class="wrapper">
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <span class="navbar-brand">Sistem Bidan</span>
+        <form action="{{ route('logout') }}" method="POST" class="ml-auto">
+    @csrf
+    <button type="submit" class="btn btn-danger btn-sm">
+        Logout
+    </button>
+</form>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="#" class="brand-link text-center">
+            <span class="brand-text">Bidan App</span>
+        </a>
+
+        <div class="sidebar">
+            <nav>
+                <ul class="nav nav-pills nav-sidebar flex-column">
+
+                    <li class="nav-item">
+                        <a href="/dashboard" class="nav-link">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/pasiens" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Data Pasien</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
         </div>
-    </body>
+    </aside>
+
+    <!-- CONTENT -->
+    <div class="content-wrapper">
+        <section class="content p-3">
+            @yield('content')
+        </section>
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+</body>
 </html>
