@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\KunjunganController; 
 
+
+Route::get('/kunjungans/create', [KunjunganController::class, 'create']);
+Route::post('/kunjungans', [KunjunganController::class, 'store']); 
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -34,3 +38,5 @@ Route::post('/logout', function () {
     request()->session()->regenerateToken();
     return redirect('/login');
 })->name('logout'); 
+
+Route::resource('pasiens', App\Http\Controllers\PasienController::class)->middleware('auth'); 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sistem Bidan</title>
+    <title>Sistem Pengelolaan Pasien</title>
 
     <!-- AdminLTE CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
@@ -16,7 +16,7 @@
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <span class="navbar-brand">Sistem Bidan</span>
+        <span class="navbar-brand">Bidan Fitriana Syaibatun</span>
         <form action="{{ route('logout') }}" method="POST" class="ml-auto">
     @csrf
     <button type="submit" class="btn btn-danger btn-sm">
@@ -28,7 +28,7 @@
     <!-- Sidebar -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="#" class="brand-link text-center">
-            <span class="brand-text">Bidan App</span>
+            <span class="brand-text">Praktik Bidan Mandiri</span>
         </a>
 
         <div class="sidebar">
@@ -48,10 +48,27 @@
                             <p>Data Pasien</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/kunjungans/create" class="nav-link">
+                            <i class="nav-icon fas fa-notes-medical"></i>
+                            <p>Kunjungan</p>
+                        </a>
+                    </li>
 
                 </ul>
             </nav>
         </div>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ \App\Models\RekamMedis::count() }}</h3>
+                        <p>Rekam Medis</p>
+                    </div>
+                <div class="icon">
+                <i class="fas fa-notes-medical"></i>
+            </div>
+        </div>
+    </div>
     </aside>
 
     <!-- CONTENT -->
