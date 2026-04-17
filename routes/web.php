@@ -3,11 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\KunjunganController; 
+use App\Http\Controllers\KunjunganController;
+use App\Http\Controllers\RekamMedisController; 
 
-
+Route::get('/rekam-medis/create/{kunjungan}', [RekamMedisController::class, 'create'])->name('rekam.create');
+Route::post('/rekam-medis', [RekamMedisController::class, 'store'])->name('rekam.store');
 Route::get('/kunjungans/create', [KunjunganController::class, 'create']);
 Route::post('/kunjungans', [KunjunganController::class, 'store']); 
+
 Route::get('/', function () {
     return redirect('/login');
 });

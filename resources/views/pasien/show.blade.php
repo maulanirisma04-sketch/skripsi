@@ -27,7 +27,7 @@
                     <span class="badge bg-warning">Belum ada rekam medis</span>
 
                     <!-- tombol isi rekam medis -->
-                    <a href="/rekam-medis/create/{{ $k->id }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('rekam.create', $k->id) }}" class="btn btn-primary btn-sm">
                         Isi Rekam Medis
                     </a>
                 @endif

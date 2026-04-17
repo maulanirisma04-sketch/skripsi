@@ -54,20 +54,8 @@
                             <p>Kunjungan</p>
                         </a>
                     </li>
-
                 </ul>
             </nav>
-        </div>
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>{{ \App\Models\RekamMedis::count() }}</h3>
-                        <p>Rekam Medis</p>
-                    </div>
-                <div class="icon">
-                <i class="fas fa-notes-medical"></i>
-            </div>
-        </div>
     </div>
     </aside>
 
