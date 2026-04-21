@@ -2,81 +2,157 @@
 
 @section('content')
 
-<h1>Detail Pasien</h1>
+<section class="content">
+<div class="container-fluid">
 
-<p>Nama: {{ $pasien->nama }}</p>
-
-<hr>
-
-<h3>Riwayat Kunjungan</h3>
-
-@if($pasien->kunjungans->count() > 0)
-
-    @foreach($pasien->kunjungans as $k)
-<div class="card mb-3">
-    <div class="card-body">
-
-        <p><b>Tanggal:</b> {{ $k->tanggal_kunjungan }}</p>
-        <p><b>Jenis:</b> {{ $k->jenis_pemeriksaan }}</p>
-
-        @if($k->rekamMedis)
-
-            <p><b>Tekanan Darah:</b> {{ $k->rekamMedis->tekanan_darah }}</p>
-            <p><b>Suhu:</b> {{ $k->rekamMedis->suhu }}</p>
-            <p><b>Berat Badan:</b> {{ $k->rekamMedis->berat_badan }}</p>
-
-            <p><b>Diagnosis:</b> {{ $k->rekamMedis->diagnosis }}</p>
-            <p><b>Catatan:</b> {{ $k->rekamMedis->catatan }}</p>
-
-            <hr>
-
-            {{-- ================== YANG FORM DINAMIS ================== --}}
-
-            @if($k->jenis_pemeriksaan == 'kehamilan' && $k->rekamMedis->kehamilan)
-                <h5>Data Kehamilan</h5>
-                <p>Usia Kehamilan: {{ $k->rekamMedis->kehamilan->usia_kehamilan }}</p>
-                <p>TFU: {{ $k->rekamMedis->kehamilan->tfu }}</p>
-                <p>DJJ: {{ $k->rekamMedis->kehamilan->djj }}</p>
-                <p>Posisi Janin: {{ $k->rekamMedis->kehamilan->posisi_janin }}</p>
-            @endif
-
-            @if($k->jenis_pemeriksaan == 'kb' && $k->rekamMedis->kb)
-                <h5>Data KB</h5>
-                <p>Jenis KB: {{ $k->rekamMedis->kb->jenis_kb }}</p>
-                <p>Efek Samping: {{ $k->rekamMedis->kb->efek_samping }}</p>
-                <p>Jadwal Berikutnya: {{ $k->rekamMedis->kb->jadwal_berikutnya }}</p>
-            @endif
-
-            @if($k->jenis_pemeriksaan == 'imunisasi' && $k->rekamMedis->imunisasi)
-                <h5>Data Imunisasi</h5>
-                <p>Jenis Imunisasi: {{ $k->rekamMedis->imunisasi->jenis_imunisasi }}</p>
-                <p>Jadwal Berikutnya: {{ $k->rekamMedis->imunisasi->jadwal_berikutnya }}</p>
-            @endif
-
-            @if($k->jenis_pemeriksaan == 'persalinan' && $k->rekamMedis->persalinan)
-                <h5>Data Persalinan</h5>
-                <p>Jenis Persalinan: {{ $k->rekamMedis->persalinan->jenis_persalinan }}</p>
-                <p>Berat Bayi: {{ $k->rekamMedis->persalinan->berat_bayi }}</p>
-                <p>Tinggi Bayi: {{ $k->rekamMedis->persalinan->tinggi_bayi }}</p>
-                <p>APGAR: {{ $k->rekamMedis->persalinan->apgar }}</p>
-            @endif
-
-        @else
-            <span class="badge bg-warning">Belum ada rekam medis</span>
-
-            <a href="{{ route('rekam.create', $k->id) }}" class="btn btn-primary btn-sm">
-                Isi Rekam Medis
-            </a>
-        @endif
-
+    <!-- HEADER PASIEN -->
+     <a href="{{ route('pasien.pdf', $pasien->id) }}" class="btn btn-danger mb-3">
+    <i class="fas fa-file-pdf"></i> Export PDF </a>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-0">{{ $pasien->nama }}</h4>
+                <small class="text-muted">Data Pasien</small>
+            </div>
+            <i class="fas fa-user fa-2x text-primary"></i>
+        </div>
     </div>
+
+    <!-- RIWAYAT -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Riwayat Kunjungan</h3>
+        </div>
+
+        <div class="card-body">
+
+        @forelse($pasien->kunjungans as $k)
+
+        <div class="card mb-3 border-left-primary shadow-sm">
+            <div class="card-body">
+
+                <!-- HEADER KUNJUNGAN -->
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="mb-1">
+                            <i class="fas fa-calendar"></i>
+                            {{ $k->tanggal_kunjungan }}
+                        </h6>
+
+                        @php
+                            $warna = [
+                                'kehamilan' => 'success',
+                                'kb' => 'warning',
+                                'imunisasi' => 'primary',
+                                'persalinan' => 'danger'
+                            ];
+                        @endphp
+
+                        <span class="badge bg-{{ $warna[$k->jenis_pemeriksaan] ?? 'secondary' }}">
+                            {{ strtoupper($k->jenis_pemeriksaan) }}
+                        </span>
+                    </div>
+
+                    @if(!$k->rekamMedis)
+                        <a href="{{ route('rekam.create', $k->id) }}" 
+                           class="btn btn-sm btn-primary">
+                            <i class="fas fa-plus"></i> Isi
+                        </a>
+                    @endif
+                </div>
+
+                <hr>
+
+                @if($k->rekamMedis)
+
+                <!-- GRID UMUM -->
+                <div class="row text-center mb-3">
+                    <div class="col-md-3">
+                        <div class="p-2 bg-light rounded">
+                            <small>Tekanan Darah</small>
+                            <div><b>{{ $k->rekamMedis->tekanan_darah ?? '-' }}</b></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-2 bg-light rounded">
+                            <small>Suhu Tubuh</small>
+                            <div><b>{{ $k->rekamMedis->suhu ?? '-' }}</b></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-2 bg-light rounded">
+                            <small>Berat Badan</small>
+                            <div><b>{{ $k->rekamMedis->berat_badan ?? '-' }}</b></div>
+                        </div>
+                    </div>
+                </div>
+
+                <p><b>Diagnosis:</b> {{ $k->rekamMedis->diagnosis ?? '-' }}</p>
+                <p><b>Keluhan :</b> {{ $k->rekamMedis->catatan ?? '-' }}</p>
+
+                <!-- DETAIL SESUAI JENIS -->
+                <div class="mt-3">
+
+                @if($k->rekamMedis->kehamilan)
+                    <div class="alert alert-success">
+                        <b>Kehamilan</b><br>
+                        Usia: {{ $k->rekamMedis->kehamilan->usia_kehamilan }} minggu |
+                        Tinggi Fudus Uteri: {{ $k->rekamMedis->kehamilan->tfu }} cm |
+                        Detak Jantung Janin : {{ $k->rekamMedis->kehamilan->djj }} |
+                        Posisi: {{ $k->rekamMedis->kehamilan->posisi_janin }}
+                    </div>
+                @endif
+
+                @if($k->rekamMedis->kb)
+                    <div class="alert alert-warning">
+                        <b>KB</b><br>
+                        Jenis: {{ $k->rekamMedis->kb->jenis_kb }} |
+                        Efek: {{ $k->rekamMedis->kb->efek_samping }} |
+                        Jadwal: {{ $k->rekamMedis->kb->jadwal_berikutnya }}
+                    </div>
+                @endif
+
+                @if($k->rekamMedis->imunisasi)
+                    <div class="alert alert-primary">
+                        <b>Imunisasi</b><br>
+                        Jenis Vaksin : {{ $k->rekamMedis->imunisasi->jenis_imunisasi }} |
+                        Jadwal: {{ $k->rekamMedis->imunisasi->jadwal_berikutnya }}
+                    </div>
+                @endif
+
+                @if($k->rekamMedis->persalinan)
+                    <div class="alert alert-danger">
+                        <b>Persalinan</b><br>
+                        Jenis: {{ $k->rekamMedis->persalinan->jenis_persalinan }} |
+                        Berat Badan Bayi : {{ $k->rekamMedis->persalinan->berat_bayi }} |
+                        Tinggi Bayi: {{ $k->rekamMedis->persalinan->tinggi_bayi }} |
+                        APGAR: {{ $k->rekamMedis->persalinan->apgar }}
+                    </div>
+                @endif
+
+                </div>
+
+                @endif
+
+            </div>
+        </div>
+
+        @empty
+
+        <!-- EMPTY STATE -->
+        <div class="text-center text-muted p-4">
+            <i class="fas fa-folder-open fa-2x mb-2"></i>
+            <p>Belum ada kunjungan</p>
+        </div>
+
+        @endforelse
+
+        </div>
+    </div>
+
 </div>
-@endforeach
-
-@else
-
-    <p>Belum ada kunjungan</p>
-
-@endif
+</section>
 
 @endsection

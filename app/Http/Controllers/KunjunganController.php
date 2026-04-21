@@ -17,7 +17,7 @@ class KunjunganController extends Controller
         $request->validate([
             'pasien_id' => 'required',
             'tanggal_kunjungan' => 'required',
-            'jenis_pemeriksaan' => 'required'
+            'jenis_pemeriksaan' => 'nullable'
         ]);\App\Models\Kunjungan::create([
             'pasien_id' => $request->pasien_id,
             'tanggal_kunjungan' => $request->tanggal_kunjungan,

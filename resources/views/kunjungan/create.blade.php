@@ -22,18 +22,12 @@
                     <label>Pasien</label>
                     <select name="pasien_id" class="form-control select2">
                         <option value="">-- Pilih Pasien --</option>
-                         @foreach($pasiens as $p)
-                        <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                        @foreach($pasiens as $p)
+                            <option value="{{ $p->id }}">
+                                {{ $p->nama }}
+                            </option>
                         @endforeach
                     </select>
-                    <script>
-                        $(document).ready(function() {
-                        $('.select2').select2({
-                            placeholder: "Cari pasien...",
-                            allowClear: true
-                        });
-                        });
-                    </script>
                 </div>
 
                 <!-- TANGGAL -->
@@ -45,8 +39,8 @@
                 <!-- JENIS -->
                 <div class="form-group mb-3">
                     <label>Jenis Pemeriksaan</label>
-                    <select name="jenis_pemeriksaan" class="form-control" required>
-                        <option value="">-- Pilih Jenis --</option>
+                    <select name="jenis_pemeriksaan" class="form-control">
+                        <option value="">Pemeriksaan Umum</option>
                         <option value="kehamilan">Kehamilan</option>
                         <option value="persalinan">Persalinan</option>
                         <option value="imunisasi">Imunisasi</option>

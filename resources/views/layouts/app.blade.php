@@ -9,6 +9,11 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>.select2-container {width: 100% !important;}
+            .select2-container .select2-selection--single {height: 38px !important;padding: 5px 10px;border: 1px solid #ced4da;}
+            .select2-selection__rendered {line-height: 28px !important;}
+            .select2-selection__arrow {height: 38px !important;}
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -71,10 +76,15 @@
 
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script> 
-<script>$(document).ready(function() {$('.select2').select2({ placeholder: "Cari pasien...", allowClear: true, width: '100%'
+
+<script>
+$(document).ready(function() {
+    $('.select2').select2({
+        placeholder: "Cari pasien...",
+        allowClear: true,
+        width: '100%'
     });
 });
 </script>

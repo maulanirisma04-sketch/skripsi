@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pasien;
+use Barryvdh\DomPDF\Facade\Pdf; 
 
 class PasienController extends Controller
 {
@@ -22,7 +23,10 @@ class PasienController extends Controller
         return redirect()->route('pasiens.index'); 
     }
     public function show($id){
-        $pasien = \App\Models\Pasien::with('kunjungans.rekamMedis')->findOrFail($id);
+         $pasien = \App\Models\Pasien::with(['kunjungans.rekamMedis'])
+        ->findOrFail($id);
+        // ini deskending biar apa? biar kunjungan yang terbabru paling atas
+        $pasien->kunjungans = $pasien->kunjungans->sortByDesc('tanggal_kunjungan');
         return view('pasien.show', compact('pasien'));
     }
     public function edit($id){
@@ -41,4 +45,9 @@ class PasienController extends Controller
         $pasien->delete();
         return redirect('/pasiens');
         }
+    public function exportPdf($id){
+        $pasien = \App\Models\Pasien::with('kunjungans.rekamMedis')->findOrFail($id);
+        $pdf = Pdf::loadView('pasien.pdf', compact('pasien'));
+        return $pdf->download('laporan-pasien-'.$pasien->nama.'.pdf');
+    }
 }
