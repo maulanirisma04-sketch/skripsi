@@ -7,9 +7,12 @@ use App\Models\Pasien;
 
 class PasienController extends Controller
 {
-    public function index(){
-        $pasiens = Pasien::all();
-        return view('pasien.index', compact('pasiens'));
+    public function index(Request $request){
+        $search = $request->search;
+        $pasiens = Pasien::when($search, function ($query, $search) {
+        return $query->where('nama', 'like', '%' . $search . '%');
+        })->get();
+        return view('pasien.index', compact('pasiens', 'search'));
     }
     public function create(){
         return view('pasien.create');
@@ -37,5 +40,5 @@ class PasienController extends Controller
         $pasien = Pasien::findOrFail($id);
         $pasien->delete();
         return redirect('/pasiens');
-    }
+        }
 }

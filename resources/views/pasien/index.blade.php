@@ -10,6 +10,17 @@
     <a href="/pasiens/create" class="btn btn-primary mb-3">
         Tambah Pasien
     </a>
+    <form method="GET" action="">
+    <div class="mb-3">
+        <input 
+            type="text" 
+            name="search" 
+            class="form-control" 
+            placeholder="Cari nama pasien..."
+            value="{{ $search ?? '' }}"
+        >
+    </div>
+    </form>
 
     <div class="card">
         <div class="card-body">
