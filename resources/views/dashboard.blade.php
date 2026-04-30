@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 
-    <h3 class="mb-4">Dashboard </h3>
+    <h3 class="mb-4">Dashboard</h3>
 
     <!-- SUMMARY -->
     <div class="row">
@@ -51,8 +51,43 @@
 
     </div>
 
+    <!-- STAT TAMBAHAN -->
+    <div class="row mt-3">
+
+        <div class="col-md-4">
+            <div class="small-box bg-pink">
+                <div class="inner">
+                    <h3>{{ $statKehamilan }}</h3>
+                    <p>Data Kehamilan</p>
+                </div>
+                <div class="icon"><i class="fas fa-baby"></i></div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="small-box bg-purple">
+                <div class="inner">
+                    <h3>{{ $statKb }}</h3>
+                    <p>Data KB</p>
+                </div>
+                <div class="icon"><i class="fas fa-syringe"></i></div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="small-box bg-teal">
+                <div class="inner">
+                    <h3>{{ $statImunisasi }}</h3>
+                    <p>Imunisasi</p>
+                </div>
+                <div class="icon"><i class="fas fa-shield-virus"></i></div>
+            </div>
+        </div>
+
+    </div>
+
     <!-- GRAFIK -->
-    <div class="card">
+    <div class="card mt-3">
         <div class="card-header">
             <h3 class="card-title">Grafik Kunjungan 7 Hari Terakhir</h3>
         </div>
@@ -61,6 +96,50 @@
         </div>
     </div>
 
+    <!-- JADWAL -->
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">Jadwal Hari Ini</h3>
+        </div>
+        <div class="card-body">
+
+            @if($jadwalList->count() > 0)
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nama Pasien</th>
+                            <th>Jenis</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach($jadwalList as $j)
+                        <tr>
+                            <td>{{ $j['nama'] ?? '-' }}</td>
+                            <td>{{ $j['jenis'] ?? '-' }}</td>
+                            <td>
+                                @if($j['kunjungan_id'])
+                                    <a href="{{ route('rekam-medis.create', $j['kunjungan_id']) }}" class="btn btn-primary btn-sm">
+                                        Isi Rekam Medis
+                                    </a>
+                                @else
+                                    <span class="text-muted">Tidak tersedia</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+
+            @else
+                <p class="text-muted">Tidak ada jadwal hari ini</p>
+            @endif
+
+        </div>
+    </div>
     <!-- KUNJUNGAN TERBARU -->
     <div class="card mt-3">
         <div class="card-header">
@@ -78,7 +157,7 @@
                 <tbody>
                     @foreach($latestKunjungan as $k)
                     <tr>
-                        <td>{{ $k->pasien->nama }}</td>
+                        <td>{{ $k->pasien->nama ?? '-' }}</td>
                         <td>{{ $k->tanggal_kunjungan }}</td>
                         <td>{{ $k->jenis_pemeriksaan ?? '-' }}</td>
                     </tr>
@@ -99,12 +178,13 @@ const ctx = document.getElementById('chartKunjungan');
 new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['-6', '-5', '-4', '-3', '-2', '-1', 'Hari Ini'],
+        labels: @json($labels),
         datasets: [{
-            label: 'Jumlah Kunjungan',
+            label: 'Kunjungan',
             data: @json($grafik),
-            fill: false,
-            tension: 0.3
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
         }]
     }
 });

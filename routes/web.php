@@ -68,3 +68,10 @@ Route::get('/pasien/{id}/pdf', [PasienController::class, 'exportPdf'])->name('pa
 PASIEN (CRUD)
 */
 Route::resource('pasiens', PasienController::class)->middleware('auth'); 
+
+//buat input di dashboard
+Route::get('/rekam-medis/create', [RekamMedisController::class, 'create'])
+    ->name('rekam-medis.create');
+
+Route::post('/rekam-medis/store', [RekamMedisController::class, 'store'])
+    ->name('rekam-medis.store');
