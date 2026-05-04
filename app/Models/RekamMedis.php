@@ -15,7 +15,7 @@ class RekamMedis extends Model
         'catatan'
     ];
     public function kunjungan(){
-        return $this->hasOne(\App\Models\Kunjungan::class);
+        return $this->belongsTo(\App\Models\Kunjungan::class);
     }
     public function kehamilan(){
         return $this->hasOne(Kehamilan::class);
@@ -23,6 +23,10 @@ class RekamMedis extends Model
     public function persalinan(){
         return $this->hasOne(Persalinan::class);
     }
+    public function pasien(){
+        return $this->belongsTo(Pasien::class);
+        }
+
     public function kb(){
         return $this->hasOne(Kb::class);
     }

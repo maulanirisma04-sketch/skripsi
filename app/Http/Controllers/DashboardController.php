@@ -26,32 +26,38 @@ class DashboardController extends Controller
         // JADWAL HARI INI 
 $jadwalList = collect();
 
-// KB
-$kbList = Kb::whereDate('jadwal_berikutnya', now())->get();
-
-foreach ($kbList as $kb) {
-    $kunjungan = Kunjungan::find($kb->kunjungan_id ?? null);
-    $pasien = $kunjungan ? Pasien::find($kunjungan->pasien_id) : null;
-
-    $jadwalList->push([
-        'nama' => $pasien->nama ?? '-',
-        'jenis' => 'KB',
-        'kunjungan_id' => $kunjungan->id ?? null
-    ]);
-}
-
-// Imunisasi
-$imunisasiList = Imunisasi::whereDate('jadwal_berikutnya', now())->get();
+// IMUNISASI
+$imunisasiList = Imunisasi::with('kunjungan.pasien')
+    ->whereDate('jadwal_berikutnya', now())
+    ->where('status', 'pending')
+    ->get();
 
 foreach ($imunisasiList as $imunisasi) {
-    $kunjungan = Kunjungan::find($imunisasi->kunjungan_id ?? null);
-    $pasien = $kunjungan ? Pasien::find($kunjungan->pasien_id) : null;
 
-    $jadwalList->push([
-        'nama' => $pasien->nama ?? '-',
-        'jenis' => 'Imunisasi',
-        'kunjungan_id' => $kunjungan->id ?? null
-    ]);
+    if ($imunisasi->kunjungan && $imunisasi->kunjungan->pasien) {
+        $jadwalList->push([
+            'nama' => $imunisasi->kunjungan->pasien->nama,
+            'jenis' => 'Imunisasi',
+            'kunjungan_id' => $imunisasi->kunjungan->id
+        ]);
+    }
+}
+
+
+// KB
+$kbList = Kb::with('kunjungan.pasien')
+    ->whereDate('jadwal_berikutnya', now())
+    ->get();
+
+foreach ($kbList as $kb) {
+
+    if ($kb->kunjungan && $kb->kunjungan->pasien) {
+        $jadwalList->push([
+            'nama' => $kb->kunjungan->pasien->nama,
+            'jenis' => 'KB',
+            'kunjungan_id' => $kb->kunjungan->id
+        ]);
+    }
 }
 
 $jadwalHariIni = $jadwalList->count();

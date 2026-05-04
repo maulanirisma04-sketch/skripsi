@@ -121,7 +121,7 @@
                             <td>{{ $j['jenis'] ?? '-' }}</td>
                             <td>
                                 @if($j['kunjungan_id'])
-                                    <a href="{{ route('rekam-medis.create', $j['kunjungan_id']) }}" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('rekam.create', $j['kunjungan_id']) }}" class="btn btn-primary btn-sm">
                                         Isi Rekam Medis
                                     </a>
                                 @else

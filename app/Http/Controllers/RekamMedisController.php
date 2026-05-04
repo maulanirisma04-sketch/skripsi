@@ -50,6 +50,7 @@ class RekamMedisController extends Controller
                     'kunjungan_id' => $kunjungan->id,
                     'jenis_imunisasi' => $request->jenis_imunisasi,
                     'jadwal_berikutnya' => $request->jadwal_berikutnya,
+                    'status' => 'selesai',
                 ]);
                 break;
 
@@ -60,6 +61,7 @@ class RekamMedisController extends Controller
                     'jenis_kb' => $request->jenis_kb,
                     'efek_samping' => $request->efek_samping,
                     'jadwal_berikutnya' => $request->jadwal_berikutnya,
+                    'status' => 'selesai'
                 ]);
                 break;
 
