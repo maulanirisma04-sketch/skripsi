@@ -47,6 +47,7 @@ foreach ($imunisasiList as $imunisasi) {
 // KB
 $kbList = Kb::with('kunjungan.pasien')
     ->whereDate('jadwal_berikutnya', now())
+    ->where('status', 'pending')
     ->get();
 
 foreach ($kbList as $kb) {

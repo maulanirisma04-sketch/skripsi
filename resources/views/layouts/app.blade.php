@@ -1,92 +1,453 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Sistem Pengelolaan Pasien</title>
 
-    <!-- AdminLTE CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
+    <title>Sistem Bidan</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>.select2-container {width: 100% !important;}
-            .select2-container .select2-selection--single {height: 38px !important;padding: 5px 10px;border: 1px solid #ced4da;}
-            .select2-selection__rendered {line-height: 28px !important;}
-            .select2-selection__arrow {height: 38px !important;}
+    <!-- ADMIN LTE -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body{
+            background: #fffaf8;
+        }
+
+        /* NAVBAR */
+        .main-header{
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid #f7e4dc;
+
+            box-shadow: 0 3px 15px rgba(0,0,0,0.04);
+        }
+
+        .navbar-brand-custom{
+            color: #7b5b8e !important;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* SIDEBAR */
+        .main-sidebar{
+
+            background: linear-gradient(
+                180deg,
+                #fff7f3 0%,
+                #fffdfc 100%
+            ) !important;
+
+            border-right: 1px solid #f6e6dd;
+        }
+
+        /* BRAND */
+        .brand-link{
+
+            padding-top: 22px;
+            padding-bottom: 18px;
+
+            border-bottom: 1px solid #f8e8de;
+
+            background:
+            linear-gradient(
+                180deg,
+                rgba(255,240,244,0.9),
+                rgba(255,255,255,0)
+            );
+        }
+
+        .brand-text{
+            color: #7b5b8e !important;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* LOGO */
+        .logo-circle{
+
+            width: 85px;
+            height: 85px;
+
+            border-radius: 24px;
+
+            background:
+            linear-gradient(
+                135deg,
+                #fff0f5,
+                #fff7dd
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: auto;
+            margin-bottom: 14px;
+
+            box-shadow:
+            0 10px 25px rgba(245,166,19,0.15);
+
+            border: 3px solid white;
+
+            position: relative;
+        }
+
+        /* efek baby soft */
+        .logo-circle::after{
+
+            content: "🍼";
+
+            position: absolute;
+
+            bottom: -8px;
+            right: -5px;
+
+            font-size: 20px;
+
+            background: white;
+
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        /* MENU */
+        .sidebar .nav-link{
+
+            color: #8b718f !important;
+
+            border-radius: 18px;
+
+            margin: 8px 14px;
+
+            padding: 13px 16px;
+
+            font-weight: 500;
+
+            transition: all 0.25s ease;
+        }
+
+        .sidebar .nav-link:hover{
+
+            background:
+            linear-gradient(
+                135deg,
+                #fff0ea,
+                #fff6d9
+            );
+
+            color: #f5a613 !important;
+
+            transform: translateX(3px);
+        }
+
+        .sidebar .nav-link.active{
+
+            background:
+            linear-gradient(
+                135deg,
+                #bb67b5,
+                #e39ad0
+            ) !important;
+
+            color: white !important;
+
+            box-shadow:
+            0 6px 18px rgba(187,103,181,0.25);
+        }
+
+        .sidebar .nav-icon{
+            margin-right: 10px;
+        }
+
+        /* CONTENT */
+        .content-wrapper{
+
+            background:
+            linear-gradient(
+                180deg,
+                #fffaf8,
+                #fffefd
+            );
+        }
+
+        /* CARD GLOBAL */
+        .card{
+
+            border: none;
+
+            border-radius: 22px;
+
+            box-shadow:
+            0 5px 20px rgba(0,0,0,0.04);
+
+            overflow: hidden;
+        }
+
+        .card-header{
+
+            background: white !important;
+
+            border-bottom: 1px solid #f6ece7;
+        }
+
+        /* BUTTON */
+        .btn-primary{
+
+            background:
+            linear-gradient(
+                135deg,
+                #bb67b5,
+                #d989c7
+            );
+
+            border: none;
+
+            border-radius: 12px;
+
+            font-weight: 600;
+        }
+
+        .btn-primary:hover{
+            opacity: 0.95;
+        }
+
+        /* LOGOUT */
+        .btn-logout{
+
+            background:
+            linear-gradient(
+                135deg,
+                #f5a613,
+                #ffd36f
+            );
+
+            border: none;
+
+            color: white;
+
+            border-radius: 14px;
+
+            padding: 8px 16px;
+
+            font-weight: 600;
+
+            box-shadow:
+            0 4px 10px rgba(245,166,19,0.2);
+        }
+
+        .btn-logout:hover{
+            opacity: 0.92;
+            color: white;
+        }
+
+        /* TABLE */
+        .table{
+
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .table thead{
+
+            background: #fff3ef;
+            color: #7b5b8e;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar{
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background: #edcfe7;
+            border-radius: 20px;
+        }
+
     </style>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
 <div class="wrapper">
 
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <span class="navbar-brand">Bidan Fitriana Syaibatun</span>
-        <form action="{{ route('logout') }}" method="POST" class="ml-auto">
-    @csrf
-    <button type="submit" class="btn btn-danger btn-sm">
-        Logout
-    </button>
-</form>
+    <!-- NAVBAR -->
+    <nav class="main-header navbar navbar-expand navbar-light">
+
+        <!-- BRAND -->
+        <span class="navbar-brand navbar-brand-custom d-flex align-items-center">
+
+            <img src="{{ asset('asset/icon.png') }}"
+                 alt="Logo"
+                 style="
+                    width:38px;
+                    height:38px;
+                    object-fit:contain;
+                    margin-right:12px;
+                 ">
+
+            Sistem Bidan
+
+        </span>
+
+        <!-- RIGHT -->
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+
+                <form action="{{ route('logout') }}"
+                      method="POST">
+
+                    @csrf
+
+                    <button type="submit"
+                            class="btn btn-logout">
+
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+
+                    </button>
+
+                </form>
+
+            </li>
+
+        </ul>
+
     </nav>
 
-    <!-- Sidebar -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="#" class="brand-link text-center">
-            <span class="brand-text">Praktik Bidan Mandiri</span>
+    <!-- SIDEBAR -->
+    <aside class="main-sidebar elevation-4">
+
+        <!-- BRAND -->
+        <a href="/dashboard"
+           class="brand-link text-center">
+
+            <div class="logo-circle">
+
+                <img src="{{ asset('asset/logo.png') }}"
+                     alt="Logo"
+                     style="
+                        width:60px;
+                        height:60px;
+                        object-fit:contain;
+                     ">
+
+            </div>
+
+            <span class="brand-text">
+                Bidan Fithriana
+            </span>
+
+            <div style="
+                font-size:12px;
+                color:#c59eb7;
+                margin-top:4px;
+            ">
+                Klinik Ibu & Anak
+            </div>
+
         </a>
 
+        <!-- SIDEBAR -->
         <div class="sidebar">
-            <nav>
-                <ul class="nav nav-pills nav-sidebar flex-column">
 
+            <nav class="mt-3">
+
+                <ul class="nav nav-pills nav-sidebar flex-column"
+                    data-widget="treeview"
+                    role="menu">
+
+                    <!-- DASHBOARD -->
                     <li class="nav-item">
-                        <a href="/dashboard" class="nav-link">
-                            <i class="nav-icon fas fa-home"></i>
+
+                        <a href="/dashboard"
+                           class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+
+                            <i class="nav-icon fas fa-house"></i>
+
                             <p>Dashboard</p>
+
                         </a>
+
                     </li>
 
+                    <!-- PASIEN -->
                     <li class="nav-item">
-                        <a href="/pasiens" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
+
+                        <a href="/pasiens"
+                           class="nav-link {{ request()->is('pasiens*') ? 'active' : '' }}">
+
+                            <i class="nav-icon fas fa-user-group"></i>
+
                             <p>Data Pasien</p>
+
                         </a>
+
                     </li>
+
+                    <!-- KUNJUNGAN -->
                     <li class="nav-item">
-                        <a href="/kunjungans/create" class="nav-link">
-                            <i class="nav-icon fas fa-notes-medical"></i>
+
+                        <a href="/kunjungans/create"
+                           class="nav-link {{ request()->is('kunjungans*') ? 'active' : '' }}">
+
+                            <i class="nav-icon fas fa-stethoscope"></i>
+
                             <p>Kunjungan</p>
+
                         </a>
+
                     </li>
+
                 </ul>
+
             </nav>
-    </div>
+
+        </div>
+
     </aside>
 
     <!-- CONTENT -->
     <div class="content-wrapper">
+
         <section class="content p-3">
+
             @yield('content')
+
         </section>
+
     </div>
 
 </div>
 
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
-<script>
-$(document).ready(function() {
-    $('.select2').select2({
-        placeholder: "Cari pasien...",
-        allowClear: true,
-        width: '100%'
-    });
-});
-</script>
 </body>
 </html>
