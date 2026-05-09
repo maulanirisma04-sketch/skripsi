@@ -53,6 +53,13 @@
             ) !important;
 
             border-right: 1px solid #f6e6dd;
+
+            overflow-y: auto;
+        }
+
+        .sidebar{
+            height: calc(100vh - 80px);
+            overflow-y: auto;
         }
 
         /* BRAND */
@@ -180,6 +187,16 @@
 
         .sidebar .nav-icon{
             margin-right: 10px;
+        }
+
+        /* DROPDOWN */
+        .nav-treeview{
+            padding-left: 10px;
+        }
+
+        .nav-treeview .nav-link{
+            font-size: 14px;
+            padding: 10px 14px;
         }
 
         /* CONTENT */
@@ -367,7 +384,7 @@
                 color:#c59eb7;
                 margin-top:4px;
             ">
-                Klinik Ibu & Anak
+                Kesehatan Ibu & Anak
             </div>
 
         </a>
@@ -379,7 +396,8 @@
 
                 <ul class="nav nav-pills nav-sidebar flex-column"
                     data-widget="treeview"
-                    role="menu">
+                    role="menu"
+                    data-accordion="false">
 
                     <!-- DASHBOARD -->
                     <li class="nav-item">
@@ -420,6 +438,113 @@
                             <p>Kunjungan</p>
 
                         </a>
+
+                    </li>
+
+                    <!-- OBAT -->
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-capsules"></i>
+
+                            <p>Data Obat</p>
+
+                        </a>
+
+                    </li>
+
+                    <!-- LAPORAN -->
+                    <li class="nav-item has-treeview 
+                        {{ request()->is('laporan*') ? 'menu-open' : '' }}">
+
+                        <a href="#"
+                           class="nav-link 
+                           {{ request()->is('laporan*') ? 'active' : '' }}">
+
+                            <i class="nav-icon fas fa-file-medical-alt"></i>
+
+                            <p>
+                                Laporan
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+                            <!-- SEMUA -->
+                            <li class="nav-item">
+
+                                <a href="/laporan"
+                                   class="nav-link {{ request()->is('laporan') ? 'active' : '' }}">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>Semua Laporan</p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- KEHAMILAN -->
+                            <li class="nav-item">
+
+                                <a href="/laporan/kehamilan"
+                                   class="nav-link {{ request()->is('laporan/kehamilan') ? 'active' : '' }}">
+
+                                    <i class="fas fa-baby nav-icon"></i>
+
+                                    <p>Laporan Kehamilan</p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- IMUNISASI -->
+                            <li class="nav-item">
+
+                                <a href="/laporan/imunisasi"
+                                   class="nav-link {{ request()->is('laporan/imunisasi') ? 'active' : '' }}">
+
+                                    <i class="fas fa-syringe nav-icon"></i>
+
+                                    <p>Laporan Imunisasi</p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- KB -->
+                            <li class="nav-item">
+
+                                <a href="/laporan/kb"
+                                   class="nav-link {{ request()->is('laporan/kb') ? 'active' : '' }}">
+
+                                    <i class="fas fa-heart nav-icon"></i>
+
+                                    <p>Laporan KB</p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- PERSALINAN -->
+                            <li class="nav-item">
+
+                                <a href="/laporan/persalinan"
+                                   class="nav-link {{ request()->is('laporan/persalinan') ? 'active' : '' }}">
+
+                                    <i class="fas fa-hospital-user nav-icon"></i>
+
+                                    <p>Laporan Persalinan</p>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
 
                     </li>
 

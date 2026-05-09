@@ -253,87 +253,92 @@
     </div>
 
     <!-- JADWAL -->
-    <div class="card card-custom mb-4">
+    <!-- JADWAL -->
+<div class="card card-custom mb-4">
 
-        <div class="card-header card-header-custom">
+    <div class="card-header card-header-custom">
 
-            <h3 class="card-title-custom">
-                Jadwal Hari Ini
-            </h3>
-
-        </div>
-
-        <div class="card-body">
-
-            @if($jadwalList->count() > 0)
-
-                <table class="table table-hover">
-
-                    <thead>
-                        <tr>
-                            <th>Nama Pasien</th>
-                            <th>Jenis</th>
-                            <th width="200">Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        @foreach($jadwalList as $j)
-
-                        <tr>
-
-                            <td>{{ $j['nama'] ?? '-' }}</td>
-
-                            <td>{{ $j['jenis'] ?? '-' }}</td>
-
-                            <td>
-
-                                @if($j['kunjungan_id'])
-
-                                    <a href="{{ route('rekam.create', $j['kunjungan_id']) }}"
-                                       class="btn btn-custom btn-sm">
-
-                                        <i class="fas fa-notes-medical"></i>
-                                        Isi Rekam Medis
-
-                                    </a>
-
-                                @else
-
-                                    <span class="text-muted">
-                                        Tidak tersedia
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-                        </tr>
-
-                        @endforeach
-
-                    </tbody>
-
-                </table>
-
-            @else
-
-                <div class="text-center text-muted py-4">
-
-                    <i class="fas fa-calendar-times fa-2x mb-2"></i>
-
-                    <p>
-                        Tidak ada jadwal hari ini
-                    </p>
-
-                </div>
-
-            @endif
-
-        </div>
+        <h3 class="card-title-custom">
+            Jadwal Hari Ini
+        </h3>
 
     </div>
+
+    <div class="card-body">
+
+        @if($jadwalList->count() > 0)
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+                        <th>Nama Pasien</th>
+                        <th>Jenis</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach($jadwalList as $j)
+
+                    <tr>
+
+                        <td>
+                            {{ $j['nama'] ?? '-' }}
+                        </td>
+
+                        <td>
+
+                            @if(($j['jenis'] ?? '') == 'Imunisasi')
+
+                                <span class="badge badge-info">
+                                    Imunisasi
+                                </span>
+
+                            @elseif(($j['jenis'] ?? '') == 'KB')
+
+                                <span class="badge badge-warning">
+                                    KB
+                                </span>
+
+                            @else
+
+                                <span class="badge badge-secondary">
+                                    -
+                                </span>
+
+                            @endif
+
+                        </td>
+
+
+                    </tr>
+
+                    @endforeach
+
+                </tbody>
+
+            </table>
+
+        @else
+
+            <div class="text-center text-muted py-4">
+
+                <i class="fas fa-calendar-times fa-2x mb-2"></i>
+
+                <p class="mt-2 mb-0">
+                    Tidak ada jadwal hari ini
+                </p>
+
+            </div>
+
+        @endif
+
+    </div>
+
+</div>
 
     <!-- KUNJUNGAN TERBARU -->
     <div class="card card-custom">

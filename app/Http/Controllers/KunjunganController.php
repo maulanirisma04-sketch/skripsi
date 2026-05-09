@@ -27,4 +27,4 @@ class KunjunganController extends Controller
         ]);
         return redirect('/pasiens');
     }
-}
+} 

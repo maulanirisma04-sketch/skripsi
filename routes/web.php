@@ -7,6 +7,7 @@ use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\PasienController; 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 
 /*
 REDIRECT AWAL
@@ -50,7 +51,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 /*
 REKAM MEDIS
 */
-Route::get('/rekam-medis/create/{kunjungan}', [RekamMedisController::class, 'create'])->name('rekam.create');
+Route::get('/rekam-medis/create/{kunjungan_id}', [RekamMedisController::class, 'create'])->name('rekam.create');
 Route::post('/rekam-medis', [RekamMedisController::class, 'store'])->name('rekam.store');
 
 /*
@@ -58,6 +59,10 @@ KUNJUNGAN
 */
 Route::get('/kunjungans/create', [KunjunganController::class, 'create'])->middleware('auth');
 Route::post('/kunjungans', [KunjunganController::class, 'store'])->middleware('auth');
+
+
+Route::get('/kunjungan/jadwal',[KunjunganController::class, 'buatDariJadwal'])
+    ->name('kunjungan.jadwal');
 
 /*
  PDF
@@ -69,9 +74,27 @@ PASIEN (CRUD)
 */
 Route::resource('pasiens', PasienController::class)->middleware('auth'); 
 
-//buat input di dashboard
-Route::get('/rekam-medis/create', [RekamMedisController::class, 'create'])
-    ->name('rekam-medis.create');
+/*
+LAPORAN
+*/
+Route::get('/laporan', [LaporanController::class, 'index'])
+    ->middleware('auth');
 
-Route::post('/rekam-medis/store', [RekamMedisController::class, 'store'])
-    ->name('rekam-medis.store');
+Route::get('/laporan/pdf', [LaporanController::class, 'exportPdf'])
+    ->middleware('auth')
+    ->name('laporan.pdf');
+
+Route::get('/laporan/kehamilan', [LaporanController::class, 'kehamilan'])
+    ->middleware('auth');
+
+Route::get('/laporan/imunisasi', [LaporanController::class, 'imunisasi'])
+    ->middleware('auth');
+
+Route::get('/laporan/kb', [LaporanController::class, 'kb'])
+    ->middleware('auth');
+
+Route::get('/laporan/persalinan', [LaporanController::class, 'persalinan'])
+    ->middleware('auth');
+
+
+

@@ -15,83 +15,154 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // 🔹 Statistik
+        // =========================
+        // STATISTIK
+        // =========================
         $totalPasien = Pasien::count();
+
         $statKehamilan = Kehamilan::count();
+
         $statKb = Kb::count();
+
         $statImunisasi = Imunisasi::count();
-        $kunjunganHariIni = Kunjungan::whereDate('tanggal_kunjungan', Carbon::today())->count();
+
+        $kunjunganHariIni = Kunjungan::whereDate(
+            'tanggal_kunjungan',
+            Carbon::today()
+        )->count();
+
         $totalRekamMedis = RekamMedis::count();
 
-        // JADWAL HARI INI 
-$jadwalList = collect();
 
-// IMUNISASI
-$imunisasiList = Imunisasi::with('kunjungan.pasien')
-    ->whereDate('jadwal_berikutnya', now())
-    ->where('status', 'pending')
-    ->get();
-
-foreach ($imunisasiList as $imunisasi) {
-
-    if ($imunisasi->kunjungan && $imunisasi->kunjungan->pasien) {
-        $jadwalList->push([
-            'nama' => $imunisasi->kunjungan->pasien->nama,
-            'jenis' => 'Imunisasi',
-            'kunjungan_id' => $imunisasi->kunjungan->id
-        ]);
-    }
-}
+        // =========================
+        // JADWAL HARI INI
+        // =========================
+        $jadwalList = collect();
 
 
-// KB
-$kbList = Kb::with('kunjungan.pasien')
-    ->whereDate('jadwal_berikutnya', now())
-    ->where('status', 'pending')
-    ->get();
+        // =========================
+        // IMUNISASI
+        // =========================
+        $imunisasiList = Imunisasi::with(
+            'rekamMedis.kunjungan.pasien'
+        )
+        ->whereDate(
+            'jadwal_berikutnya',
+            Carbon::today()
+        )
+        ->get();
 
-foreach ($kbList as $kb) {
+        foreach ($imunisasiList as $imunisasi) {
 
-    if ($kb->kunjungan && $kb->kunjungan->pasien) {
-        $jadwalList->push([
-            'nama' => $kb->kunjungan->pasien->nama,
-            'jenis' => 'KB',
-            'kunjungan_id' => $kb->kunjungan->id
-        ]);
-    }
-}
+            $kunjungan = $imunisasi->rekamMedis?->kunjungan;
 
-$jadwalHariIni = $jadwalList->count();
+            $pasien = $kunjungan?->pasien;
 
-        // 🔹 Grafik 7 hari
+            if ($pasien) {
+
+                $jadwalList->push([
+
+                    'nama' => $pasien->nama,
+
+                    'jenis' => 'Imunisasi',
+
+                    'pasien_id' => $pasien->id
+                ]);
+            }
+        }
+
+
+        // =========================
+        // KB
+        // =========================
+        $kbList = Kb::with(
+            'rekamMedis.kunjungan.pasien'
+        )
+        ->whereDate(
+            'jadwal_berikutnya',
+            Carbon::today()
+        )
+        ->get();
+
+        foreach ($kbList as $kb) {
+
+            $kunjungan = $kb->rekamMedis?->kunjungan;
+
+            $pasien = $kunjungan?->pasien;
+
+            if ($pasien) {
+
+                $jadwalList->push([
+
+                    'nama' => $pasien->nama,
+
+                    'jenis' => 'KB',
+
+                    'pasien_id' => $pasien->id
+                ]);
+            }
+        }
+
+
+        $jadwalHariIni = $jadwalList->count();
+
+
+        // =========================
+        // GRAFIK 7 HARI
+        // =========================
         $labels = [];
+
         $grafik = [];
 
         for ($i = 6; $i >= 0; $i--) {
+
             $date = Carbon::today()->subDays($i);
+
             $labels[] = $date->format('d M');
-            $grafik[] = Kunjungan::whereDate('tanggal_kunjungan', $date)->count();
+
+            $grafik[] = Kunjungan::whereDate(
+                'tanggal_kunjungan',
+                $date
+            )->count();
         }
 
-        // 🔹 Kunjungan terbaru
+
+        // =========================
+        // KUNJUNGAN TERBARU
+        // =========================
         $latestKunjungan = Kunjungan::with('pasien')
             ->whereHas('pasien')
             ->latest()
             ->take(5)
             ->get();
 
+
+        // =========================
+        // RETURN VIEW
+        // =========================
         return view('dashboard', compact(
+
             'totalPasien',
-            'totalRekamMedis',
-            'kunjunganHariIni',
-            'jadwalHariIni',
-            'grafik',
-            'labels',
-            'latestKunjungan',
+
             'statKehamilan',
+
             'statKb',
+
             'statImunisasi',
-            'jadwalList'
+
+            'kunjunganHariIni',
+
+            'totalRekamMedis',
+
+            'jadwalHariIni',
+
+            'jadwalList',
+
+            'labels',
+
+            'grafik',
+
+            'latestKunjungan'
         ));
     }
 }
