@@ -8,7 +8,7 @@ use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\PasienController; 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
-
+use App\Http\Controllers\ObatController;
 /*
 REDIRECT AWAL
 */
@@ -97,4 +97,9 @@ Route::get('/laporan/persalinan', [LaporanController::class, 'persalinan'])
     ->middleware('auth');
 
 
+/*
+Obat
+*/
+Route::resource('obats', ObatController::class)
+    ->middleware('auth');
 

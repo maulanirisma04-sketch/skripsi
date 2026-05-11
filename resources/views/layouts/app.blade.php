@@ -444,7 +444,7 @@
                     <!-- OBAT -->
                     <li class="nav-item">
 
-                        <a href="#"
+                        <a href="{{ route('obats.index') }}"
                            class="nav-link">
 
                             <i class="nav-icon fas fa-capsules"></i>
