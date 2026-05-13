@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class RekamMedis extends Model
 {
+    protected $table = 'rekam_medis';
     protected $fillable = [
         'kunjungan_id',
         'tekanan_darah',
         'suhu',
         'berat_badan',
         'diagnosis',
-        'catatan'
+        'catatan',
+        'resep_obat'
     ];
     public function kunjungan(){
         return $this->belongsTo(\App\Models\Kunjungan::class);

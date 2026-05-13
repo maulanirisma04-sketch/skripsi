@@ -180,7 +180,7 @@
 
                 <hr>
 
-                @if($k->rekamMedis)
+                @if($k->rekamMedis != null)
 
                 <!-- DATA UMUM -->
                 <div class="row text-center mb-4">
@@ -227,6 +227,22 @@
 
                             <h5 class="mt-2">
                                 {{ $k->rekamMedis->berat_badan ?? '-' }}
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                                        <div class="col-md-4 mb-3">
+
+                        <div class="info-box-custom">
+
+                            <small class="text-muted">
+                                Resep Obat
+                            </small>
+
+                            <h5 class="mt-2">
+                                {{ $k->rekamMedis->resep_obat?? '-' }}
                             </h5>
 
                         </div>

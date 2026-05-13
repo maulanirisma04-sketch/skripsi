@@ -23,7 +23,6 @@ class RekamMedisController extends Controller
     public function store(Request $request)
     {
         $kunjungan = Kunjungan::findOrFail($request->kunjungan_id);
-
         $rekam = RekamMedis::create([
             'kunjungan_id' => $kunjungan->id,
             'tekanan_darah' => $request->tekanan_darah,
@@ -32,6 +31,9 @@ class RekamMedisController extends Controller
             'diagnosis' => $request->diagnosis,
             'catatan' => $request->catatan,
         ]);
+
+        $rekam->resep_obat = $request->resep_obat;
+        $rekam->save();
 
         // LOGIC BERDASARKAN JENIS
         switch ($kunjungan->jenis_pemeriksaan) {

@@ -168,6 +168,13 @@
 
                 </div>
 
+                <div class="col-md-4 mb-3">
+
+                    <label>Resep Obat</label>
+                        <textarea name="resep_obat"
+                              class="form-control"></textarea>
+                    </div>
+
                 <!-- KHUSUS KEHAMILAN -->
                 @if($kunjungan->jenis_pemeriksaan == 'kehamilan')
 

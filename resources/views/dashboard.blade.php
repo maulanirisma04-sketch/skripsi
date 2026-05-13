@@ -9,57 +9,6 @@
         font-weight: bold;
     }
 
-    .summary-card{
-        border-radius: 18px;
-        color: white;
-        padding: 20px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        transition: 0.3s;
-    }
-
-    .summary-card:hover{
-        transform: translateY(-3px);
-    }
-
-    .summary-card h3{
-        font-size: 32px;
-        font-weight: bold;
-    }
-
-    .summary-card .icon{
-        position: absolute;
-        right: 20px;
-        bottom: 15px;
-        font-size: 55px;
-        opacity: 0.2;
-    }
-
-    .bg-soft-purple{
-        background: linear-gradient(135deg, #bb67b5, #d991d4);
-    }
-
-    .bg-soft-blue{
-        background: linear-gradient(135deg, #7aa7ff, #9ec5ff);
-    }
-
-    .bg-soft-pink{
-        background: linear-gradient(135deg, #ff9ecf, #ffc2df);
-    }
-
-    .bg-soft-green{
-        background: linear-gradient(135deg, #71d7b7, #9ae7cf);
-    }
-
-    .bg-soft-orange{
-        background: linear-gradient(135deg, #ffb36b, #ffd199);
-    }
-
-    .bg-soft-red{
-        background: linear-gradient(135deg, #ff8d8d, #ffb3b3);
-    }
-
     .card-custom{
         border-radius: 18px;
         border: none;
@@ -89,18 +38,15 @@
         overflow: hidden;
     }
 
-    .btn-custom{
-        background-color: #bb67b5;
-        border-color: #bb67b5;
-        color: white;
-        border-radius: 10px;
-        font-weight: 600;
+    .info-box-custom{
+        background: #faf5fb;
+        border-radius: 12px;
+        padding: 15px;
     }
 
-    .btn-custom:hover{
-        background-color: #a956a3;
-        border-color: #a956a3;
-        color: white;
+    .badge{
+        padding: 8px 12px;
+        border-radius: 8px;
     }
 
 </style>
@@ -111,120 +57,247 @@
         Dashboard
     </h2>
 
-    <!-- SUMMARY -->
-    <div class="row">
+    <!-- COMPANY PROFILE -->
+    <div class="card card-custom mb-4">
 
-        <div class="col-md-3 mb-4">
+        <div class="card-header card-header-custom">
 
-            <div class="summary-card bg-soft-purple">
+            <h3 class="card-title-custom">
+                Profil Praktik Bidan
+            </h3>
 
-                <h3>{{ $totalPasien }}</h3>
+        </div>
 
-                <p>Total Pasien</p>
+        <div class="card-body">
 
-                <div class="icon">
-                    <i class="fas fa-users"></i>
+            <!-- FOTO TEMPAT -->
+            <div class="mb-4">
+
+                <img src="{{ asset('assets/img/tempat-praktik.jpg') }}"
+                     class="img-fluid rounded shadow-sm"
+                     style="
+                        width:100%;
+                        max-height:350px;
+                        object-fit:cover;
+                     ">
+
+            </div>
+
+            <!-- DESKRIPSI -->
+            <div class="mb-5">
+
+                <h3 style="
+                    color:#7a3d76;
+                    font-weight:bold;
+                ">
+
+                    Praktik Mandiri Bidan Fithriana
+
+                </h3>
+
+                <p class="text-muted mt-3"
+                   style="
+                        line-height:1.9;
+                        text-align:justify;
+                   ">
+
+                    Praktik Mandiri Bidan Fithriana merupakan layanan 
+                    kesehatan yang berfokus pada pelayanan ibu dan anak 
+                    dengan memberikan pelayanan yang profesional, aman, dan 
+                    nyaman bagi pasien. Praktik Mandiri Bidan Fithriana 
+                    berlokasi di Jalan Letda Lukito No. 12, Desa Jatiroke RT 
+                    01 RW 04, Kecamatan Jatinangor. Dengan mengutamakan 
+                    kualitas pelayanan dan kenyamanan pasien, praktik ini 
+                    menyediakan berbagai layanan kesehatan seperti 
+                    pemeriksaan kehamilan, pelayanan KB, imunisasi, 
+                    persalinan, serta pemeriksaan kesehatan ibu dan anak.
+
+                </p>
+
+                <!-- LAYANAN -->
+                <div class="row mt-4">
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="info-box-custom text-center">
+
+                            <i class="fas fa-baby mb-2"
+                               style="
+                                    font-size:28px;
+                                    color:#bb67b5;
+                               ">
+                            </i>
+
+                            <h6 class="mb-1"
+                                style="
+                                    color:#7a3d76;
+                                    font-weight:bold;
+                                ">
+
+                                Kehamilan
+
+                            </h6>
+
+                            <small class="text-muted">
+                                Pemeriksaan ibu hamil
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="info-box-custom text-center">
+
+                            <i class="fas fa-syringe mb-2"
+                               style="
+                                    font-size:28px;
+                                    color:#bb67b5;
+                               ">
+                            </i>
+
+                            <h6 class="mb-1"
+                                style="
+                                    color:#7a3d76;
+                                    font-weight:bold;
+                                ">
+
+                                KB
+
+                            </h6>
+
+                            <small class="text-muted">
+                                Pelayanan keluarga berencana
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="info-box-custom text-center">
+
+                            <i class="fas fa-shield-virus mb-2"
+                               style="
+                                    font-size:28px;
+                                    color:#bb67b5;
+                               ">
+                            </i>
+
+                            <h6 class="mb-1"
+                                style="
+                                    color:#7a3d76;
+                                    font-weight:bold;
+                                ">
+
+                                Imunisasi
+
+                            </h6>
+
+                            <small class="text-muted">
+                                Imunisasi bayi & anak
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <div class="info-box-custom text-center">
+
+                            <i class="fas fa-heartbeat mb-2"
+                               style="
+                                    font-size:28px;
+                                    color:#bb67b5;
+                               ">
+                            </i>
+
+                            <h6 class="mb-1"
+                                style="
+                                    color:#7a3d76;
+                                    font-weight:bold;
+                                ">
+
+                                Persalinan
+
+                            </h6>
+
+                            <small class="text-muted">
+                                Pelayanan persalinan
+                            </small>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
+            <!-- FOTO BIDAN -->
+            <div class="row text-center">
 
-        <div class="col-md-3 mb-4">
+                <div class="col-md-6 mb-4">
 
-            <div class="summary-card bg-soft-green">
+                    <div class="p-3">
 
-                <h3>{{ $kunjunganHariIni }}</h3>
+                        <img src="{{ asset('assets/img/bidan1.jpg') }}"
+                             class="img-fluid rounded-circle shadow"
+                             style="
+                                width:180px;
+                                height:180px;
+                                object-fit:cover;
+                             ">
 
-                <p>Kunjungan Hari Ini</p>
+                        <h5 class="mt-3 mb-1"
+                            style="
+                                color:#7a3d76;
+                                font-weight:bold;
+                            ">
 
-                <div class="icon">
-                    <i class="fas fa-notes-medical"></i>
+                            Bidan Fithriana
+
+                        </h5>
+
+                        <small class="text-muted">
+                            Pelayanan Kesehatan
+                        </small>
+
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="col-md-6 mb-4">
 
-        </div>
+                    <div class="p-3">
 
-        <div class="col-md-3 mb-4">
+                        <img src="{{ asset('assets/img/bidan2.jpg') }}"
+                             class="img-fluid rounded-circle shadow"
+                             style="
+                                width:180px;
+                                height:180px;
+                                object-fit:cover;
+                             ">
 
-            <div class="summary-card bg-soft-orange">
+                        <h5 class="mt-3 mb-1"
+                            style="
+                                color:#7a3d76;
+                                font-weight:bold;
+                            ">
 
-                <h3>{{ $totalRekamMedis }}</h3>
+                            Bidan Afifah
 
-                <p>Total Rekam Medis</p>
+                        </h5>
 
-                <div class="icon">
-                    <i class="fas fa-file-medical"></i>
-                </div>
+                        <small class="text-muted">
+                            Pelayanan Kesehatan
+                        </small>
 
-            </div>
+                    </div>
 
-        </div>
-
-        <div class="col-md-3 mb-4">
-
-            <div class="summary-card bg-soft-red">
-
-                <h3>{{ $jadwalHariIni }}</h3>
-
-                <p>Jadwal Hari Ini</p>
-
-                <div class="icon">
-                    <i class="fas fa-calendar"></i>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- STAT TAMBAHAN -->
-    <div class="row">
-
-        <div class="col-md-4 mb-4">
-
-            <div class="summary-card bg-soft-pink">
-
-                <h3>{{ $statKehamilan }}</h3>
-
-                <p>Data Kehamilan</p>
-
-                <div class="icon">
-                    <i class="fas fa-baby"></i>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4 mb-4">
-
-            <div class="summary-card bg-soft-purple">
-
-                <h3>{{ $statKb }}</h3>
-
-                <p>Data KB</p>
-
-                <div class="icon">
-                    <i class="fas fa-syringe"></i>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4 mb-4">
-
-            <div class="summary-card bg-soft-blue">
-
-                <h3>{{ $statImunisasi }}</h3>
-
-                <p>Imunisasi</p>
-
-                <div class="icon">
-                    <i class="fas fa-shield-virus"></i>
                 </div>
 
             </div>
@@ -253,92 +326,90 @@
     </div>
 
     <!-- JADWAL -->
-    <!-- JADWAL -->
-<div class="card card-custom mb-4">
+    <div class="card card-custom mb-4">
 
-    <div class="card-header card-header-custom">
+        <div class="card-header card-header-custom">
 
-        <h3 class="card-title-custom">
-            Jadwal Hari Ini
-        </h3>
+            <h3 class="card-title-custom">
+                Jadwal Hari Ini
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            @if($jadwalList->count() > 0)
+
+                <table class="table table-hover">
+
+                    <thead>
+
+                        <tr>
+                            <th>Nama Pasien</th>
+                            <th>Jenis</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach($jadwalList as $j)
+
+                        <tr>
+
+                            <td>
+                                {{ $j['nama'] ?? '-' }}
+                            </td>
+
+                            <td>
+
+                                @if(($j['jenis'] ?? '') == 'Imunisasi')
+
+                                    <span class="badge badge-info">
+                                        Imunisasi
+                                    </span>
+
+                                @elseif(($j['jenis'] ?? '') == 'KB')
+
+                                    <span class="badge badge-warning">
+                                        KB
+                                    </span>
+
+                                @else
+
+                                    <span class="badge badge-secondary">
+                                        -
+                                    </span>
+
+                                @endif
+
+                            </td>
+
+                        </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            @else
+
+                <div class="text-center text-muted py-4">
+
+                    <i class="fas fa-calendar-times fa-2x mb-2"></i>
+
+                    <p class="mt-2 mb-0">
+                        Tidak ada jadwal hari ini
+                    </p>
+
+                </div>
+
+            @endif
+
+        </div>
 
     </div>
-
-    <div class="card-body">
-
-        @if($jadwalList->count() > 0)
-
-            <table class="table table-hover">
-
-                <thead>
-
-                    <tr>
-                        <th>Nama Pasien</th>
-                        <th>Jenis</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    @foreach($jadwalList as $j)
-
-                    <tr>
-
-                        <td>
-                            {{ $j['nama'] ?? '-' }}
-                        </td>
-
-                        <td>
-
-                            @if(($j['jenis'] ?? '') == 'Imunisasi')
-
-                                <span class="badge badge-info">
-                                    Imunisasi
-                                </span>
-
-                            @elseif(($j['jenis'] ?? '') == 'KB')
-
-                                <span class="badge badge-warning">
-                                    KB
-                                </span>
-
-                            @else
-
-                                <span class="badge badge-secondary">
-                                    -
-                                </span>
-
-                            @endif
-
-                        </td>
-
-
-                    </tr>
-
-                    @endforeach
-
-                </tbody>
-
-            </table>
-
-        @else
-
-            <div class="text-center text-muted py-4">
-
-                <i class="fas fa-calendar-times fa-2x mb-2"></i>
-
-                <p class="mt-2 mb-0">
-                    Tidak ada jadwal hari ini
-                </p>
-
-            </div>
-
-        @endif
-
-    </div>
-
-</div>
 
     <!-- KUNJUNGAN TERBARU -->
     <div class="card card-custom">
