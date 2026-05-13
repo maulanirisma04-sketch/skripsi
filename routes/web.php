@@ -64,6 +64,17 @@ Route::post('/kunjungans', [KunjunganController::class, 'store'])->middleware('a
 Route::get('/kunjungan/jadwal',[KunjunganController::class, 'buatDariJadwal'])
     ->name('kunjungan.jadwal');
 
+Route::get('/antrian/{id}/download',
+    [KunjunganController::class, 'downloadAntrian'])
+    ->name('antrian.download');
+
+/*
+ANTRIAN
+*/
+Route::get('/antrian/{id}/download',
+    [KunjunganController::class, 'downloadAntrian']
+)->name('antrian.download');
+
 /*
  PDF
 */
@@ -102,4 +113,6 @@ Obat
 */
 Route::resource('obats', ObatController::class)
     ->middleware('auth');
+
+
 

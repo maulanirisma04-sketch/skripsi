@@ -63,6 +63,13 @@
         font-weight: 600;
     }
 
+    .antrian-box{
+        background: #fdf4fc;
+        border: 1px dashed #d991d4;
+        border-radius: 12px;
+        padding: 15px;
+    }
+
 </style>
 
 <section class="content">
@@ -97,7 +104,8 @@
                     <label>Pasien</label>
 
                     <select name="pasien_id"
-                            class="form-control select2">
+                            class="form-control select2"
+                            required>
 
                         <option value="">
                             -- Pilih Pasien --
@@ -124,6 +132,26 @@
                            name="tanggal_kunjungan"
                            class="form-control"
                            required>
+
+                </div>
+
+                <!-- NOMOR ANTRIAN -->
+                <div class="form-group mb-4">
+
+                    <label>Nomor Antrian</label>
+
+                    <div class="antrian-box">
+
+                        <input type="text"
+                            class="form-control mb-2"
+                            value="Otomatis dibuat setelah data disimpan"
+                            readonly>
+
+                        <small class="text-muted">
+                            Nomor antrian akan dibuat otomatis berdasarkan urutan kunjungan pada hari tersebut.
+                        </small>
+
+                    </div>
 
                 </div>
 
@@ -167,7 +195,7 @@
                 <button class="btn btn-save">
 
                     <i class="fas fa-save"></i>
-                    Simpan
+                    Simpan & Download Antrian
 
                 </button>
 
