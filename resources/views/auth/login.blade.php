@@ -7,7 +7,7 @@
 
     <style>
         .login-page{
-            background-image: url('{{ asset('asset/background.jpg') }}');
+            background-image: url('{{ asset('asset/background-login.png') }}');
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;

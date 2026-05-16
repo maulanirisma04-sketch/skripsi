@@ -365,7 +365,7 @@
 
             <div class="logo-circle">
 
-                <img src="{{ asset('asset/logo.png') }}"
+                <img src="{{ asset('asset/logo.jpeg') }}"
                      alt="Logo"
                      style="
                         width:60px;

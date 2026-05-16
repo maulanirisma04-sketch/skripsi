@@ -42,6 +42,7 @@
         background: #faf5fb;
         border-radius: 12px;
         padding: 15px;
+        height: 100%;
     }
 
     .badge{
@@ -73,7 +74,7 @@
             <!-- FOTO TEMPAT -->
             <div class="mb-4">
 
-                <img src="{{ asset('assets/img/tempat-praktik.jpg') }}"
+                <img src="{{ asset('images/foto_gedung.jpeg') }}"
                      class="img-fluid rounded shadow-sm"
                      style="
                         width:100%;
@@ -244,7 +245,7 @@
 
                     <div class="p-3">
 
-                        <img src="{{ asset('assets/img/bidan1.jpg') }}"
+                        <img src="{{ asset('asset/foto_bu_ana.jpeg') }}"
                              class="img-fluid rounded-circle shadow"
                              style="
                                 width:180px;
@@ -274,7 +275,7 @@
 
                     <div class="p-3">
 
-                        <img src="{{ asset('assets/img/bidan2.jpg') }}"
+                        <img src="{{ asset('asset/foto_bu_afifah.jpeg') }}"
                              class="img-fluid rounded-circle shadow"
                              style="
                                 width:180px;
@@ -365,19 +366,19 @@
 
                                 @if(($j['jenis'] ?? '') == 'Imunisasi')
 
-                                    <span class="badge badge-info">
+                                    <span class="badge bg-info">
                                         Imunisasi
                                     </span>
 
                                 @elseif(($j['jenis'] ?? '') == 'KB')
 
-                                    <span class="badge badge-warning">
+                                    <span class="badge bg-warning text-dark">
                                         KB
                                     </span>
 
                                 @else
 
-                                    <span class="badge badge-secondary">
+                                    <span class="badge bg-secondary">
                                         -
                                     </span>
 
@@ -442,11 +443,17 @@
 
                     <tr>
 
-                        <td>{{ $k->pasien->nama ?? '-' }}</td>
+                        <td>
+                            {{ $k->pasien->nama ?? '-' }}
+                        </td>
 
-                        <td>{{ $k->tanggal_kunjungan }}</td>
+                        <td>
+                            {{ $k->tanggal_kunjungan }}
+                        </td>
 
-                        <td>{{ $k->jenis_pemeriksaan ?? '-' }}</td>
+                        <td>
+                            {{ $k->jenis_pemeriksaan ?? '-' }}
+                        </td>
 
                     </tr>
 
@@ -503,9 +510,13 @@ new Chart(ctx, {
         plugins: {
 
             legend: {
+
                 labels: {
+
                     color: '#7a3d76'
+
                 }
+
             }
 
         }
