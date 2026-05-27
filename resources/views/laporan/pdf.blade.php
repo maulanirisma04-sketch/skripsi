@@ -82,6 +82,7 @@
                 <th>Berat</th>
                 <th>Diagnosis</th>
                 <th>Keluhan</th>
+                <th>Resep Obat</th>
                 <th>Detail</th>
 
             </tr>
@@ -128,6 +129,10 @@
 
                 <td>
                     {{ $d->catatan ?? '-' }}
+                </td>
+
+                <td>
+                    {{ $d->resep_obat ?? '-' }}
                 </td>
 
                 <td>

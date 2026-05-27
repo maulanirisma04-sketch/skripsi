@@ -111,19 +111,23 @@
 
         </div>
 
+        <!-- EXPORT PDF -->
+        <div class="px-3 pb-3">
+
+            <a href="{{ route('laporan.pdf', [
+                'tanggal_awal' => request('tanggal_awal'),
+                'tanggal_akhir' => request('tanggal_akhir')
+            ]) }}"
+            class="btn btn-danger">
+
+                <i class="fas fa-file-pdf"></i>
+                Export PDF
+
+            </a>
+
+        </div>
+
     </div>
-    
-    <! -- ini buat export pdf -- !>
-    <a href="{{ route('laporan.pdf', [
-        'tanggal_awal' => request('tanggal_awal'),
-        'tanggal_akhir' => request('tanggal_akhir')
-    ]) }}"
-    class="btn btn-danger">
-
-        <i class="fas fa-file-pdf"></i>
-        Export PDF
-
-    </a>
 
     <!-- TABLE -->
     <div class="card border-0 shadow-sm"
@@ -154,6 +158,8 @@
                             <th>Diagnosis</th>
 
                             <th>Catatan</th>
+
+                            <th>Resep Obat</th>
 
                         </tr>
 
@@ -245,13 +251,20 @@
 
                             </td>
 
+                            <!-- RESEP OBAT -->
+                            <td>
+
+                                {{ $d->resep_obat ?? '-' }}
+
+                            </td>
+
                         </tr>
 
                         @empty
 
                         <tr>
 
-                            <td colspan="5"
+                            <td colspan="6"
                                 class="text-center py-5 text-muted">
 
                                 <i class="fas fa-folder-open fa-2x mb-3"></i>
